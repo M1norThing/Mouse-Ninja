@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    [SerializeField] int value;
+    [SerializeField] ParticleSystem explosionParticle;
+
+    private SpawnManager spawnManager;
     private Rigidbody targetRB;
     private float torqueForce = 10;
     private float minSpeed = 12;
@@ -13,11 +17,11 @@ public class Target : MonoBehaviour
 
     void Start()
     {
+        spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         targetRB = GetComponent<Rigidbody>();
         targetRB.AddForce(RandomForce(), ForceMode.Impulse);
         targetRB.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
         transform.position = RandomSpawnPosition();
-
     }
 
     Vector3 RandomForce()
@@ -38,12 +42,16 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        spawnManager.UpdateScore(value);
+        Instantiate(explosionParticle,transform.position,explosionParticle.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad"))
+        {
+            spawnManager.GameOver();
+        }
     }
-
-
 }

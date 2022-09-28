@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6872371457033918361}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Untagged
+  m_TagString: Bad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,3 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56286a4fffd941428d8cd4230707d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
+  explosionParticle: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054, type: 3}
